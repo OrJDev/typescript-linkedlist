@@ -28,15 +28,13 @@ export default class LinkedList {
             if (this.head.value === value) {
                 this.head = this.head.next
             } else {
-                let prev: NullAble = null;
-                let current: NullAble = this.head;
+                let prev: any = null;
+                let current: any = this.head;
                 while (current && current.value !== value) {
                     prev = current;
                     current = current.next
                 }
-                if (prev && current) {
-                    prev.next = current.next;
-                }
+                prev.next = current.next;
             }
         }
     }
@@ -93,6 +91,59 @@ export default class LinkedList {
         }
         return null;
     }
+
+    /**
+     * 
+     * @param index 
+     * @description remove the element at the index
+     */
+    removeAt(index: number) {
+        if (this.head !== null) {
+            if (index === 0) {
+                this.head = this.head.next;
+            } else {
+                let prev: any = null;
+                let current: any = this.head;
+                let i = 0;
+                while (current && i < index) {
+                    prev = current;
+                    current = current.next;
+                    i++;
+                }
+                prev.next = current.next;
+            }
+        }
+    }
+
+    /**
+     * 
+     * @param index 
+     * @param value 
+     * @description insert the element at the index
+     */
+    addAt(index: number, value: any) {
+        if (index === 0) {
+            if (this.head == null) {
+                this.head = new ListNode(value);
+            } else {
+                let newNode = new ListNode(value);
+                newNode.next = this.head;
+                this.head = newNode;
+            }
+        } else {
+            let prev: any = null;
+            let current: any = this.head;
+            let i = 0;
+            while (current && i < index) {
+                prev = current;
+                current = current.next;
+                i++;
+            }
+            prev.next = new ListNode(value);
+            prev.next.next = current;
+        }
+    }
+
 
     /**
      * 
